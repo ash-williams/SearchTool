@@ -1,0 +1,8 @@
+#####################################
+### Todo list
+#####################################
+
+1. Retrive HTML from results
+2. Retreive article from HTML
+3. Generate and release test scripts
+4. Is there a way to automatically get the API usage and quotas?
