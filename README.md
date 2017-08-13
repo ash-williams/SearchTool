@@ -28,13 +28,18 @@ pip install -r requirements.txt
 
 or run the provided `MAKEFILE`.
 
-### Connecting to the database
-Next, edit `db_config.json`, located in the config directory. Add the path to your database, and your desired database name.
+### Set up the Custom Search API
+This application runs on top of Google's Custom Search API (CSE). For instructions on how to set up CSE, consult the user guide in `/docs`
+
+### Updating the config file
+Next, edit `config.json`, located in the config directory. Add the path to your database, your desired database name, API key and search engine ID.
 
 ```
 {
 	"db_url": "mongodb://127.0.0.1/",
-	"db_client": "relevance-querying"
+	"db_client": "searchtool",
+	"api_key": " api key ",
+	"search_engine_id": " search engine id "
 }
 ```
 
