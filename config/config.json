@@ -1,0 +1,6 @@
+{
+	"db_url": "mongodb://127.0.0.1/",
+	"db_client": "searchtool",
+	"search_engine_id": "",
+	"api_key": ""
+}

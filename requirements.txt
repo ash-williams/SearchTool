@@ -1,0 +1,8 @@
+#
+####### requirements.txt #######
+#
+
+pymongo == 3.4.0             # Version Matching. Tested with version 3.4.0
+urllib3
+bs4
+google-api-python-client
