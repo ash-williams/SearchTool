@@ -1,4 +1,4 @@
-# Blog search tool
+# SearchTool
 
 This tool is designed to help users retrieve relevant blog articles. It sits on top of existing search engines to further filter results to ensure relevance. 
 
@@ -8,7 +8,7 @@ This tool is designed to help users retrieve relevant blog articles. It sits on 
 To get started with this tool, download using the following command:
 
 ```
-git clone https://github.com/zedrem/relevance_querying
+git clone https://github.com/zedrem/SearchTool
 ```
 
 ### Prerequisites
