@@ -50,7 +50,7 @@ This setup file tests the connection to your database, and then loads the exampl
 ---
 
 ## Running the application
-Coming soon
+Read the user guide in `/docs` for a brief description of how to use this tool.
 
 ---
 
