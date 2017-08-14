@@ -173,8 +173,8 @@ def queryAPI(query, start_date, end_date, number_of_results):
 
 		# get the results
 		results = []
-
-		if int(result['queries']['request'][0]['totalResults']) > 0:
+		total_results = result['queries']['request'][0]['totalResults']
+		if int(total_results) > 0:
 			for item in result['items']:
 				splitMeta = item['snippet'].split(" ")
 
@@ -205,6 +205,7 @@ def queryAPI(query, start_date, end_date, number_of_results):
 			"number_of_runs"	:	str(sets.getNumberOfRuns()),
 			"number_of_results"	:	number_of_results,
 			"start_from_result" :	i,
+			"total_results"		:	total_results,
 			"timestamp"			:	str(datetime.datetime.fromtimestamp(time.time())),
 			"results"			:	results
 		}

@@ -135,7 +135,7 @@ def exportResultsCSV():
 		os.makedirs(directory)
 
 	with open(path, 'w') as csvfile:
-	    fieldnames = ['query', 'query_string', 'search_engine_id', 'start_date', 'end_date', 'query_mode', 'number_of_runs', 'number_of_results', 'start_from_result', 'timestamp', 'title', 'url', 'date', 'meta']
+	    fieldnames = ['query', 'query_string', 'search_engine_id', 'start_date', 'end_date', 'query_mode', 'number_of_runs', 'number_of_results', 'start_from_result', 'total_results', 'timestamp', 'title', 'url', 'date', 'meta']
 
 	    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, lineterminator='\n')
 	    writer.writeheader()
@@ -154,6 +154,7 @@ def exportResultsCSV():
 	    			"number_of_runs": doc['number_of_runs'],
 	    			"number_of_results": doc['number_of_results'],
 	    			"start_from_result": doc['start_from_result'],
+	    			"total_results": doc['total_results'],
 	    			"timestamp": doc['timestamp'],
 	    			"title": r['title'],
 	    			"url": r['url'],
@@ -179,7 +180,7 @@ def exportArchiveCSV():
 		os.makedirs(directory)
 
 	with open(path, 'w') as csvfile:
-	    fieldnames = ['query', 'query_string', 'search_engine_id', 'start_date', 'end_date', 'query_mode', 'number_of_runs', 'number_of_results', 'start_from_result', 'timestamp', 'title', 'url', 'date', 'meta']
+	    fieldnames = ['query', 'query_string', 'search_engine_id', 'start_date', 'end_date', 'query_mode', 'number_of_runs', 'number_of_results', 'start_from_result', 'total_results', 'timestamp', 'title', 'url', 'date', 'meta']
 
 	    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, lineterminator='\n')
 	    writer.writeheader()
@@ -198,6 +199,7 @@ def exportArchiveCSV():
 	    			"number_of_runs": doc['number_of_runs'],
 	    			"number_of_results": doc['number_of_results'],
 	    			"start_from_result": doc['start_from_result'],
+	    			"total_results": doc['total_results'],
 	    			"timestamp": doc['timestamp'],
 	    			"title": r['title'],
 	    			"url": r['url'],
