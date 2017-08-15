@@ -134,7 +134,7 @@ def exportResultsCSV():
 	if not os.path.exists(directory):
 		os.makedirs(directory)
 
-	with open(path, 'w') as csvfile:
+	with open(path, 'w', encoding='utf8') as csvfile:
 	    fieldnames = ['query', 'query_string', 'search_engine_id', 'start_date', 'end_date', 'query_mode', 'number_of_runs', 'number_of_results', 'start_from_result', 'total_results', 'timestamp', 'title', 'url', 'date', 'meta']
 
 	    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, lineterminator='\n')
@@ -179,7 +179,7 @@ def exportArchiveCSV():
 	if not os.path.exists(directory):
 		os.makedirs(directory)
 
-	with open(path, 'w') as csvfile:
+	with open(path, 'w', encoding='utf8') as csvfile:
 	    fieldnames = ['query', 'query_string', 'search_engine_id', 'start_date', 'end_date', 'query_mode', 'number_of_runs', 'number_of_results', 'start_from_result', 'total_results', 'timestamp', 'title', 'url', 'date', 'meta']
 
 	    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, lineterminator='\n')
