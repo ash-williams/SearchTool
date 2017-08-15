@@ -38,7 +38,6 @@ def query(query_string, indicators, start_date, end_date, number_of_results):
 	# MULTI query mode returns a list of strings
 	generated_query = ql.generateQuery(query_string, indicators, query_mode)
 
-
 	# query the API
 	results = []
 

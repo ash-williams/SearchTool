@@ -92,7 +92,7 @@ def generateQuery(query_string, indicators, query_mode):
 
 	else:
 		# query mode is MULTI, create a list of queries
-			
+
 		# get the indicators from the database
 		indicator_types = []
 		
@@ -100,16 +100,14 @@ def generateQuery(query_string, indicators, query_mode):
 			db_ind = db.indicators.find_one({"code": ind_code})
 			indicator_types.append(db_ind)
 
+		# make ind_words a nested list of indicators by their indicator type
 		ind_words = []
 		for ind_type in indicator_types:
-			for word in ind_type['words']:
-				ind_words.append(word)
+			ind_words.append(ind_type['words'])
 
 		# get all combinations
-		all_combos = []
-		for i in range(0, len(ind_words)):
-			all_combos += itertools.combinations(ind_words, i)
-		
+		all_combos = list(itertools.product(*ind_words))
+
 		query_list = []
 		for combo in all_combos:
 			combo = list(combo)
