@@ -34,7 +34,7 @@ def optionRunSearch():
 		number_of_results = 50
 	else:
 		number_of_results = int(number_of_results)
-	# print(dir(st))
+
 	st.searchtool.query(query_string, indicators, start_date, end_date, number_of_results)
 
 def optionExportResults():
