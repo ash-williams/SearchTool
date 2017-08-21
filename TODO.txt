@@ -6,3 +6,6 @@
 2. Retreive article from HTML
 3. Generate and release test scripts
 4. Is there a way to automatically get the API usage and quotas?
+
+5. update documentation with new stuff
+	-  duplication calculations
