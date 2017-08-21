@@ -3,3 +3,7 @@
 
 # ignore the config files, don't accidentally upload your API key. Just leave as the existing blank files and indicators. :)
 **/config
+
+
+# ignore any test files
+**/test*.*
