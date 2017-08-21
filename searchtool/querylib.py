@@ -49,6 +49,7 @@ def validateOptionalArgs(indicators, start_date, end_date, number_of_results):
 	if number_of_results % 10 != 0:
 		return False
 
+
 	return True
 
 
@@ -109,6 +110,10 @@ def generateQuery(query_string, indicators, query_mode):
 		all_combos = list(itertools.product(*ind_words))
 
 		query_list = []
+
+		# have one query that is just the query string
+		query_list.append(query_string)
+
 		for combo in all_combos:
 			combo = list(combo)
 
@@ -152,20 +157,14 @@ def queryAPI(query, start_date, end_date, number_of_results):
 
 	# make multiple api calls in multiples of 10 to get number of results
 	for i in range(0, number_of_results, 10):
+		i += 1
 
-		if i == 0:
-			api_call = service.cse().list(
-				q=query,
-				cx=search_engine_id,
-				sort=get_date_string(start_date, end_date)
-			)
-		else:
-			api_call = service.cse().list(
-				q=query,
-				cx=search_engine_id,
-				sort=get_date_string(start_date, end_date),
-				start=i
-			)
+		api_call = service.cse().list(
+			q=query,
+			cx=search_engine_id,
+			sort=get_date_string(start_date, end_date),
+			start=i
+		)
 
 		result = api_call.execute()
 
@@ -211,7 +210,57 @@ def queryAPI(query, start_date, end_date, number_of_results):
 		result_list.append(json_data)
 	return result_list
 
+def calculateDuplications():
+	"""
+	Drops and populates the query_duplications table with calculated duplications
+	"""
+	db = sets.getDB()
 
+	db.query_duplications.drop()
+
+	# get all results (query history)
+	archive_results = db.query_archive.find()
+
+	# init duplication count list
+	duplication_count = []
+
+
+	for res in archive_results:
+		query_string = res['query_string'] 
+		date = res['timestamp'][0:13] #2017-08-21 16:34:31.622082
+		results_list = res['results']
+		for r in results_list:
+			url = r['url']
+
+			# Ignore query parameters
+			url_split = url.split('?')
+			base_url = url_split[0]
+
+			flag = False
+
+			for record in duplication_count:
+				if base_url == record['url']:
+					record['count'] = record['count'] + 1
+
+					if query_string not in record['query_list']:
+						record['query_list'].append(query_string)
+
+					if date not in record['date_list']:
+						record['date_list'].append(date)
+					
+					flag = True
+					break
+
+			if flag == False:
+				duplication_count.append({"url": base_url, "count": 1, "query_list": [query_string], "date_list": [date]})
+
+	for item in duplication_count:
+		db.query_duplications.insert({
+			"url": item['url'],
+			"frequency": item['count'],
+			"query_list": item['query_list'],
+			"date_list": item['date_list']
+		})
 
 
 

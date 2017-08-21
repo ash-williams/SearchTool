@@ -3,6 +3,7 @@
 """
 import sys
 import searchtool.settings as sets
+import searchtool.querylib as ql
 import searchtool as st
 
 def optionRunSearch():
@@ -34,7 +35,7 @@ def optionRunSearch():
 		number_of_results = 50
 	else:
 		number_of_results = int(number_of_results)
-
+	# print(dir(st))
 	st.searchtool.query(query_string, indicators, start_date, end_date, number_of_results)
 
 def optionExportResults():
@@ -170,6 +171,19 @@ def optionUpdateIndicators():
 
 	print("Indicators updated")
 
+def optionExportDuplications():
+	"""
+		Export the duplications to csv
+	"""
+	print("OPTION 10: Export the duplicates to CSV")
+	print("######################################")
+	print("If you are unsure of any setting, consult the application documentation")
+	print()
+	print("######################################")
+	print()
+	ql.calculateDuplications()
+	sets.exportDuplications()
+
 
 def printMenu():
 	"""
@@ -181,15 +195,16 @@ def printMenu():
 	print()
 	print("Please select an option:")
 	print()
-	print("1 - Run search")
-	print("2 - Export results")
-	print("3 - Export result archive")
-	print("4 - View all settings")
-	print("5 - Update API key")
-	print("6 - Update Search Engine ID")
-	print("7 - Change query mode")
-	print("8 - Change number of runs")
-	print("9 - Update indicators")
+	print("1  - Run search")
+	print("2  - Export results")
+	print("3  - Export result archive")
+	print("4  - View all settings")
+	print("5  - Update API key")
+	print("6  - Update Search Engine ID")
+	print("7  - Change query mode")
+	print("8  - Change number of runs")
+	print("9  - Update indicators")
+	print("10 - Export duplications")
 	print()
 	print("*********************")
 	print("0 - Exit application")
@@ -235,5 +250,7 @@ def invokeMenuFunction(option):
 		optionChangeNumberOfRuns()
 	elif option == 9:
 		optionUpdateIndicators()
+	elif option == 10:
+		optionExportDuplications()
 	else:
 		print("Option not recognised")

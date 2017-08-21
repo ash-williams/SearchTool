@@ -27,6 +27,11 @@ def query(query_string, indicators, start_date, end_date, number_of_results):
 		print("ERROR: one or more of the optional arguments are invalid, please review the documentation and try again")
 		sys.exit()
 
+	# warn about number of results
+	if number_of_results > 100:
+		number_of_results = 100
+		print("WARNING: number of results can't be greater than 100, it has been set to 100 for you.")
+
 	# get config
 	db = sets.getDB()
 	query_mode = sets.getQueryMode()
@@ -37,6 +42,10 @@ def query(query_string, indicators, start_date, end_date, number_of_results):
 	# SINGLE query mode returns a string
 	# MULTI query mode returns a list of strings
 	generated_query = ql.generateQuery(query_string, indicators, query_mode)
+
+	print(generated_query)
+	print(len(generated_query))
+	input("All good?")
 
 	# query the API
 	results = []
@@ -61,6 +70,9 @@ def query(query_string, indicators, start_date, end_date, number_of_results):
 		for r in result_portion:
 			db.query_results.insert_one(r)
 			db.query_archive.insert_one(r)
+
+	# populate duplications
+	ql.calculateDuplications()
 
 	print("Query complete, exporting db.results...")
 	sets.exportResultsCSV()

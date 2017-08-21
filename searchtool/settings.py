@@ -209,5 +209,46 @@ def exportArchiveCSV():
 	csvfile.close()
 
 	print("Exported to CSV at: " + path)
+
+
+def exportDuplications():
+	"""
+		Analyses the archive results collection and returns a csv file formatted like:
+
+		{
+			url, 		# the url of the article
+			count, 		# the number of times that url appears
+			query_list,	# in what queries does this url exist
+			date_list	# on what days did this url appear
+		}
+
+	"""
+	db = getDB()
+
+	
+	directory = './output'
+	filename = str(time.time()) +'_duplications.csv'
+	path = directory + '/' + filename
+
+	if not os.path.exists(directory):
+		os.makedirs(directory)
+
+	with open(path, 'w', encoding='utf8') as csvfile:
+	    fieldnames = ['url', 'frequency', 'query_list', 'date_list']
+
+	    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, lineterminator='\n')
+	    writer.writeheader()
+
+	    for item in db.query_duplications.find():
+	    	writer.writerow({
+				"url": item['url'],
+				"frequency": item['frequency'],
+				"query_list": str(item['query_list']),
+				"date_list": str(item['date_list'])
+    		})
+	
+	csvfile.close()
+
+	print("Exported to CSV at: " + path)
 	    
 
