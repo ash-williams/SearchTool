@@ -119,7 +119,7 @@ def generateQuery(query_string, indicators, query_mode):
 
 			temp_query = query_string
 			for key_phrase in combo:
-				temp_query += " AND '" + key_phrase + "'"
+				temp_query += ' AND "' + key_phrase + '"'
 
 			query_list.append(temp_query)
 
